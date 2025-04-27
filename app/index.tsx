@@ -95,7 +95,7 @@ export default function Index() {
     setShowConfetti(false);
   };
 
-  // 👉 New function here:
+  
   const resetData = async () => {
     try {
       await AsyncStorage.clear();
@@ -221,7 +221,6 @@ export default function Index() {
 
         {showConfetti && <ConfettiCannon count={100} origin={{ x: screenWidth / 2, y: 0 }} />}
 
-        {/* 👉 Reset Button */}
         <View style={{ marginTop: 20, alignItems: 'center' }}>
           <TouchableOpacity
             onPress={resetData}
