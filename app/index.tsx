@@ -95,6 +95,17 @@ export default function Index() {
     setShowConfetti(false);
   };
 
+  // 👉 New function here:
+  const resetData = async () => {
+    try {
+      await AsyncStorage.clear();
+      alert('All data has been reset.');
+      loadData(); // Reload cleared state
+    } catch (error) {
+      console.error('Error clearing app data.', error);
+    }
+  };
+
   const handleDayPress = async (day: number) => {
     const newProgress = day + 1 > challengeProgress ? day + 1 : challengeProgress;
     setChallengeProgress(newProgress);
@@ -209,10 +220,26 @@ export default function Index() {
         </View>
 
         {showConfetti && <ConfettiCannon count={100} origin={{ x: screenWidth / 2, y: 0 }} />}
+
+        {/* 👉 Reset Button */}
+        <View style={{ marginTop: 20, alignItems: 'center' }}>
+          <TouchableOpacity
+            onPress={resetData}
+            style={{
+              backgroundColor: '#ff69b4',
+              paddingVertical: 12,
+              paddingHorizontal: 24,
+              borderRadius: 25,
+            }}
+          >
+            <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>Reset All Data</Text>
+          </TouchableOpacity>
+        </View>
       </>
     </ScrollView>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
